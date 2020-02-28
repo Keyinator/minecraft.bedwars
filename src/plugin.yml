@@ -1,0 +1,9 @@
+name: BW
+version: 0.3
+author: Keyinator
+website: www.keyinator.net
+main: net.keyinator.bw.Main
+commands:
+  bw:
+    description: bw
+    usage: /bw add [team|spawnpoint] [name|name] [color|]

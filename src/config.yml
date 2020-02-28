@@ -1,0 +1,44 @@
+min-players: 2 #Minimum amount of players to start the round
+max-players: 4
+countdown: 5 # In seconds. Will be used once min-players is reached
+players-per-team: 2 #Maximum amount of players in a team
+wait-time:
+  - 5
+  - 3
+  - 2
+  - 1
+teams:
+  yellow:
+    color: yellow
+    spawnpoints:
+      - ==: org.bukkit.Location
+        world: world
+        x: 42
+        y: 86
+        z: 256
+        pitch: 90
+        yaw: 0
+      - ==: org.bukkit.Location
+        world: world
+        x: 44
+        y: 86
+        z: 256
+        pitch: 90
+        yaw: 0
+  blue:
+    color: yellow
+    spawnpoints:
+      - ==: org.bukkit.Location
+        world: world
+        x: 42
+        y: 86
+        z: 254
+        pitch: 90
+        yaw: 0
+      - ==: org.bukkit.Location
+        world: world
+        x: 44
+        y: 86
+        z: 254
+        pitch: 90
+        yaw: 0
