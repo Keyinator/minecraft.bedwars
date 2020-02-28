@@ -2,6 +2,7 @@
   <dictionary name="Imman">
     <words>
       <w>iter</w>
+      <w>tabcomplete</w>
     </words>
   </dictionary>
 </component>
