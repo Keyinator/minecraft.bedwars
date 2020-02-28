@@ -1,9 +1,13 @@
 name: BW
-version: 0.3
+version: ${project.version}
 author: Keyinator
 website: www.keyinator.net
 main: net.keyinator.bw.Main
 commands:
   bw:
     description: bw
-    usage: /bw add [team|spawnpoint] [name|name] [color|]
+    usage: /bw add [team|spawnpoint] [name|name] [color]
+permissions:
+  bw.breakInLobby:
+    description: Allows to break blocks in the lobby
+    default: op

@@ -14,45 +14,35 @@ public class RoundStart {
 
     private void run() {
         //Make array for each team and add the teams
-        Map<String,Object> map = new HashMap<String,Object>(); //Object is containing String
-        Map<String,ArrayList<Player>> Teams =new HashMap<String,ArrayList<Player>>();
-        for (Map.Entry<String, Object> entry : this.plugin.getConfig().getConfigurationSection("teams").getValues(false).entrySet()) {
+        Map<String,Object> map = new HashMap<>(); //Object is containing String
+        Map<String,ArrayList<Player>> Teams =new HashMap<>();
+        Objects.requireNonNull(this.plugin.getConfig().getConfigurationSection("teams")).getValues(false);
+        for (Map.Entry<String, Object> entry : Objects.requireNonNull(this.plugin.getConfig().getConfigurationSection("teams")).getValues(false).entrySet()) {
             ArrayList<Player> new_list = new ArrayList<>();
             Teams.put(entry.getKey(), new_list);
         }
 
         //Get players and shuffle them
-        List<Player> players_random = new ArrayList<>();
-        for(Player p:getServer().getOnlinePlayers()){
-            players_random.add(p);
-        }
+        List<Player> players_random = new ArrayList<>(getServer().getOnlinePlayers());
         Collections.shuffle(players_random);
 
         //Put players into groups
         Iterator<Map.Entry<String, ArrayList<Player>>> Teams_iter = Teams.entrySet().iterator();
-        Iterator<Player> Players_iter = players_random.iterator();
-        while (Players_iter.hasNext()) {
-            Player p = Players_iter.next();
+        for (Player p : players_random) {
             //Check Teams_iter
             if (!Teams_iter.hasNext()) {
                 Teams_iter = Teams.entrySet().iterator();
             }
             Map.Entry<String, ArrayList<Player>> entry = Teams_iter.next();
             Teams.get(entry.getKey()).add(p);
-
-            //Teleport to a spawnpoint of the group
-            /*
-            this.plugin.getServer().getConsoleSender().sendMessage((String) this.plugin.getConfig().getList("teams."+entry.getKey()+".spawnpoints").get(tp_num).toString());
-            players_random.get(i).teleport((Location) this.plugin.getConfig().getList("teams."+entry.getKey()+".spawnpoints").get(tp_num));*/
         }
 
         //Telport all players of group
-        Teams_iter = Teams.entrySet().iterator();
-        while(Teams_iter.hasNext()) {
+        for (Teams_iter = Teams.entrySet().iterator(); Teams_iter.hasNext(); ) {
             Map.Entry<String, ArrayList<Player>> team = Teams_iter.next();
             Iterator<Player> Player_iter = team.getValue().iterator();
             List<?> Spawnpoints = this.plugin.getConfig().getList("teams." + team.getKey() + ".spawnpoints");
-            Iterator<?> Spawnpoint_Iter = Spawnpoints.iterator();
+            Iterator<?> Spawnpoint_Iter = Objects.requireNonNull(Spawnpoints).iterator();
             while (Player_iter.hasNext()) {
                 Player p = Player_iter.next();
                 if (!Spawnpoint_Iter.hasNext()) {
