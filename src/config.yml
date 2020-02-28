@@ -23,7 +23,15 @@ teams:
         world: world
         x: 43.5
         y: 86.0
-        z: 252.5
+        z: 254.5
+        pitch: 0.0
+        yaw: -90.0
+    beds:
+      - ==: org.bukkit.Location
+        world: world
+        x: 40.0
+        y: 86.0
+        z: 254.0
         pitch: 0.0
         yaw: 0.0
   blue:
@@ -31,8 +39,16 @@ teams:
     spawnpoints:
       - ==: org.bukkit.Location
         world: world
-        x: 43.5
+        x: 57.5
         y: 86.0
         z: 256.5
         pitch: 0.0
-        yaw: 180.0
+        yaw: 90.0
+    beds:
+      - ==: org.bukkit.Location
+        world: world
+        x: 60.0
+        y: 86.0
+        z: 254.0
+        pitch: 0.0
+        yaw: 0.0

@@ -46,7 +46,7 @@ public class LobbyJoin implements Listener {
         e.setJoinMessage(null);
         if (this.plugin.state == Main.states.lobby) {
             e.getPlayer().teleport(Objects.requireNonNull(this.plugin.getConfig().getLocation("lobby-spawn")));
-            this.plugin.getServer().broadcastMessage("[§a+§f] §b"+e.getPlayer().getName()+"§f has joined the game");
+            this.plugin.getServer().broadcastMessage("[§a+§f] §b"+e.getPlayer().getName()+"§7 has joined the game");
 
             //Handles three possibilities of joining
             if(this.plugin.getServer().getOnlinePlayers().size()>this.plugin.getConfig().getInt("max-players")) {
@@ -65,7 +65,7 @@ public class LobbyJoin implements Listener {
     public void onLeave(PlayerQuitEvent e) {
         e.setQuitMessage(null);
         if (this.plugin.state == Main.states.lobby) {
-            this.plugin.getServer().broadcastMessage("[§c-§f] §b"+e.getPlayer().getName()+"§f has left the game");
+            this.plugin.getServer().broadcastMessage("[§c-§f] §b"+e.getPlayer().getName()+"§7 has left the game");
 
             if(this.plugin.getServer().getOnlinePlayers().size()-1<this.plugin.getConfig().getInt("min-players")) {
                 this.plugin.getServer().broadcastMessage("§a"+(this.plugin.getConfig().getInt("min-players")-(this.plugin.getServer().getOnlinePlayers().size()-1))+"§b more players needed");

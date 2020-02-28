@@ -1,5 +1,6 @@
 package net.keyinator.bw.Lobby;
 
+import net.keyinator.bw.Gameplay.Statics;
 import net.keyinator.bw.Main;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -15,7 +16,7 @@ public class RoundStart {
     private void run() {
         //Make array for each team and add the teams
         Map<String,Object> map = new HashMap<>(); //Object is containing String
-        Map<String,ArrayList<Player>> Teams =new HashMap<>();
+        Map<String, ArrayList<Player>> Teams =new HashMap<>();
         Objects.requireNonNull(this.plugin.getConfig().getConfigurationSection("teams")).getValues(false);
         for (Map.Entry<String, Object> entry : Objects.requireNonNull(this.plugin.getConfig().getConfigurationSection("teams")).getValues(false).entrySet()) {
             ArrayList<Player> new_list = new ArrayList<>();
@@ -35,9 +36,11 @@ public class RoundStart {
             }
             Map.Entry<String, ArrayList<Player>> entry = Teams_iter.next();
             Teams.get(entry.getKey()).add(p);
+            String color = "§"+this.plugin.getConfig().getString("teams."+entry.getKey()+".color");
+            p.setPlayerListName("["+color+entry.getKey().toUpperCase()+"§f] §7"+p.getName());
         }
 
-        //Telport all players of group
+        //Teleport all players of group
         for (Teams_iter = Teams.entrySet().iterator(); Teams_iter.hasNext(); ) {
             Map.Entry<String, ArrayList<Player>> team = Teams_iter.next();
             Iterator<Player> Player_iter = team.getValue().iterator();
@@ -49,9 +52,10 @@ public class RoundStart {
                     Spawnpoint_Iter = Spawnpoints.iterator();
                 }
                 Object Spawnpoint = Spawnpoint_Iter.next();
-                this.plugin.getServer().getConsoleSender().sendMessage(Spawnpoint.toString());
                 p.teleport((Location) Spawnpoint);
             }
         }
+
+        Statics.setTeams(Teams);
     }
 }
